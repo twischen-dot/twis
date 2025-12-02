@@ -1,0 +1,4 @@
+[build]
+base = "zola_site"
+publish = "public"
+command = "zola build"

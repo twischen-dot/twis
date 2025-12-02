@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block sidebar %}
+<div class="nav-title">目录</div>
+{% set root = get_section(path="growth/_index.md") %}
+{% for sp in root.subsections | sort %}
+  {% set sec = get_section(path=sp) %}
+  <details class="nav-group" {% if page.path is starting_with(sec.path | replace(from="_index.md", to="")) %}open{% endif %}>
+    <summary>{{ sec.title }}</summary>
+    <ol class="nav-items">
+      {% for p in sec.pages | sort(attribute="path") %}
+        <li><a href="{{ p.permalink }}" {% if p.permalink == page.permalink %}style="font-weight:600"{% endif %}>{{ p.title | default(value=p.path) }}</a></li>
+      {% endfor %}
+    </ol>
+  </details>
+{% endfor %}
+{% endblock sidebar %}
+{% block content %}
+<article>
+  <h2>{{ page.title | default(value=config.title) }}</h2>
+  {{ page.content | safe }}
+  {% if page.taxonomies.tags %}
+  <p>标签：
+    {% for t in page.taxonomies.tags %}
+      <a href="/tags/{{ t }}/">#{{ t }}</a>
+    {% endfor %}
+  </p>
+  {% endif %}
+</article>
+{% endblock content %}

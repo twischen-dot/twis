@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block sidebar %}
+<div class="nav-title">目录</div>
+{% if section.subsections | length > 0 %}
+  {% for sp in section.subsections | sort %}
+    {% set sec = get_section(path=sp) %}
+    <details class="nav-group" {% if loop.first %}open{% endif %}>
+      <summary>{{ sec.title }}</summary>
+      <ol class="nav-items">
+        {% for page in sec.pages | sort(attribute="path") %}
+          <li><a href="{{ page.permalink }}">{{ page.title | default(value=page.path) }}</a></li>
+        {% endfor %}
+      </ol>
+    </details>
+  {% endfor %}
+{% else %}
+  <ol class="nav-items">
+    {% for page in section.pages | sort(attribute="path") %}
+      <li><a href="{{ page.permalink }}">{{ page.title | default(value=page.path) }}</a></li>
+    {% endfor %}
+  </ol>
+{% endif %}
+{% endblock sidebar %}
+
+{% block content %}
+<input id="q" type="search" placeholder="搜索..." oninput="search()" style="width:100%;padding:0.5rem 0.75rem;margin:1rem 0;border:1px solid #ddd;border-radius:6px;" />
+
+<div id="cats" style="margin:0.5rem 0 1rem 0"></div>
+
+<div id="page-list">
+  {% if section.subsections | length > 0 %}
+    {% set subs = section.subsections | sort %}
+    {% for sp in subs %}
+      {% set sec = get_section(path=sp) %}
+      <div class="group-title">{{ sec.title }}</div>
+      <ol class="group-items">
+        {% for page in sec.pages | sort(attribute="path") %}
+        <li class="list-item"><a href="{{ page.permalink }}">{{ page.title | default(value=page.path) }}</a>{% if page.date %}<span style="color:#666"> · {{ page.date | date(format="%Y-%m-%d") }}</span>{% endif %}</li>
+        {% endfor %}
+      </ol>
+    {% endfor %}
+  {% else %}
+    <ol class="group-items">
+      {% for page in section.pages | sort(attribute="path") %}
+      <li class="list-item"><a href="{{ page.permalink }}">{{ page.title | default(value=page.path) }}</a>{% if page.date %}<span style="color:#666"> · {{ page.date | date(format="%Y-%m-%d") }}</span>{% endif %}</li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+  </div>
+
+<script>
+  (function() {
+    const list = document.getElementById('page-list');
+    const items = Array.from(list.querySelectorAll('.list-item'));
+    const catsEl = document.getElementById('cats');
+
+    function catOf(li) {
+      const a = li.querySelector('a');
+      if (!a) return '';
+      try {
+        const u = new URL(a.href);
+        const parts = u.pathname.split('/').filter(Boolean);
+        // expect /growth/<cat>/...
+        return parts.length > 1 ? decodeURIComponent(parts[1]) : '';
+      } catch {
+        const parts = a.getAttribute('href').split('/').filter(Boolean);
+        return parts.length > 1 ? decodeURIComponent(parts[1]) : '';
+      }
+    }
+
+    const cats = Array.from(new Set(items.map(catOf).filter(Boolean)));
+    function renderCats() {
+      catsEl.innerHTML = '<strong>目录：</strong> ' + cats.map(c => `<button data-cat="${c}" style="margin:0.25rem; padding:0.25rem 0.5rem; border:1px solid #ddd; border-radius:12px; background:#f7f7f7; cursor:pointer">${c}</button>`).join('') + (cats.length ? `<button data-cat="__all__" style="margin:0.25rem; padding:0.25rem 0.5rem; border:1px solid #ddd; border-radius:12px; background:#f7f7f7; cursor:pointer">全部</button>` : '');
+      catsEl.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => {
+          const cat = b.getAttribute('data-cat');
+          items.forEach(li => {
+            const cur = catOf(li);
+            li.style.display = (cat === '__all__' || cur === cat) ? '' : 'none';
+          });
+        });
+      });
+    }
+    renderCats();
+  })();
+</script>
+{% endblock content %}
