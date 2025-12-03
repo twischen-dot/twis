@@ -1,7 +1,7 @@
 [build]
 base = "zola_site"
 publish = "public"
-command = "bash -lc '\nset -e\nV=${ZOLA_VERSION:-0.19.2}\nFILE=zola-v${V}-x86_64-unknown-linux-gnu.tar.gz\nURL=https://github.com/getzola/zola/releases/download/v${V}/${FILE}\necho "Downloading $URL"\ncurl -sSL "$URL" -o "$FILE"\ntar -xzf "$FILE"\n./zola build\n'"
+command = "bash -lc 'set -e; V=${ZOLA_VERSION:-0.19.2}; FILE=zola-v${V}-x86_64-unknown-linux-gnu.tar.gz; URL=https://github.com/getzola/zola/releases/download/v${V}/${FILE}; echo Downloading $URL; curl -sSL \"$URL\" -o \"$FILE\"; tar -xzf \"$FILE\"; ./zola build'"
   
 [build.environment]
 ZOLA_VERSION = "0.19.2"
