@@ -1,4 +1,4 @@
-base_url = "/"
+base_url = "https://subtle-florentine-ca7016.netlify.app"
 title = "成长足迹"
 compile_sass = false
 build_search_index = false
