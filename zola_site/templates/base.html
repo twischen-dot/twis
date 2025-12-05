@@ -21,6 +21,12 @@
     .nav-items li { margin: 0.05rem 0; }
     summary { cursor: pointer; padding: 0; }
     .main img { display: block; max-width: 600px; width: 100%; height: auto; margin: 0.5rem 0; }
+    .main table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    .main th, .main td { border: 1px solid #e5e7eb; padding: 0.5rem 0.75rem; }
+    .main thead th { background: #f3f4f6; font-weight: 600; }
+    .main tbody tr:nth-child(odd) { background: #fafafc; }
+    .main tbody tr:hover { background: #eef6ff; }
+    .main td:first-child { font-weight: 600; }
     @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; height: auto; } }
   </style>
   {% if config.build_search_index %}
