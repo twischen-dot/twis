@@ -5,3 +5,9 @@ command = "bash -lc 'set -e; V=${ZOLA_VERSION:-0.19.2}; FILE=zola-v${V}-x86_64-u
   
 [build.environment]
 ZOLA_VERSION = "0.19.2"
+
+[[redirects]]
+from = "/"
+to = "/growth/"
+status = 301
+force = true
