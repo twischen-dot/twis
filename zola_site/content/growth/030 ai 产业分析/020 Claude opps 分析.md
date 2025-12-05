@@ -4,7 +4,7 @@ date = "2025-12-05"
 +++
 
 # AI行业美股上市公司全面产业链分析
-![](image.png)
+![](/growth/030%20ai%20%E4%BA%A7%E4%B8%9A%E5%88%86%E6%9E%90/assets/020%20Claude%20opps%20%E5%88%86%E6%9E%90/image.png)
 
 ## 一、产业链整体框架
 
