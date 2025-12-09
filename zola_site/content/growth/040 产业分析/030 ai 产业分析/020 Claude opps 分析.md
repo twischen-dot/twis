@@ -1,10 +1,10 @@
 +++
 title = "020 Claude opps 分析"
-date = "2025-12-05"
+date = "2025-12-09"
 +++
 
 # AI行业美股上市公司全面产业链分析
-![](/growth/030%20ai%20%E4%BA%A7%E4%B8%9A%E5%88%86%E6%9E%90/assets/020%20Claude%20opps%20%E5%88%86%E6%9E%90/image.png)
+![](../../../030%20%E5%AD%98%E6%A1%A3/050%20%E5%AD%98%E6%A1%A3/assets/010%20backup/image.png)
 
 ## 一、产业链整体框架
 
