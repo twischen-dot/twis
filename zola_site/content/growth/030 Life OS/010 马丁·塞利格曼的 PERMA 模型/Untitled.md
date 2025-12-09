@@ -3,7 +3,7 @@ title = "Untitled"
 date = "2025-12-09"
 +++
 
-# **积极心理学核心：马丁·塞利格曼的 PERMA 模型深度解析**
+
 
 **PERMA 模型** 是积极心理学（Positive Psychology）创始人 **马丁·塞利格曼（Martin Seligman）** 在其著作《持续的幸福》（*Flourish*）中提出的核心理论。
 
